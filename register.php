@@ -7,8 +7,8 @@ if(isset($_POST['register'])){
   $email = strip_tags(mysqli_real_escape_string($mysqli,$_POST['email']));
   $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
   $answer = intval($_POST['answer']);
-  $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-  $user_agent = $_SERVER['HTTP_USER_AGENT'];
+  $ip = strip_tags(mysqli_real_escape_string($mysqli,$_SERVER['HTTP_X_FORWARDED_FOR']));
+  $user_agent = strip_tags(mysqli_real_escape_string($mysqli,$_SERVER['HTTP_USER_AGENT']));
   
   if($answer == 8){
 
