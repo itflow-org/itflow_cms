@@ -41,7 +41,7 @@ $url_query_strings_sb = http_build_query(array_merge($_GET,array('sortby' => $so
 
 $query = mysqli_query($mysqli,"SELECT SQL_CALC_FOUND_ROWS * FROM docs
 	LEFT JOIN categories ON category_id = doc_category_id
-	WHERE doc_title LIKE '%$search%' AND category_name LIKE '%$search%'
+	WHERE doc_title LIKE '%$search%' OR category_name LIKE '%$search%'
 	ORDER BY $sortby $order
 	LIMIT $record_from, $record_to"); 
 
