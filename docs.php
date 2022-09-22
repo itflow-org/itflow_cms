@@ -1,6 +1,5 @@
 <?php 
 
-//if(isset($_GET['doc'])){ $page_title = "Docs - ". $_GET['doc']; }else{ $page_title = "Docs"; }
 if(isset($_GET['doc'])){ $page_title = "Docs - ". strip_tags($_GET['doc']); }else{ $page_title = "Docs"; }
 
 include("admin/functions.php");
