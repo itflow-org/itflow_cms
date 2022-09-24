@@ -4,7 +4,7 @@
   
 if(isset($_GET['page'])){
 
-  $page_title = trim($_GET['page']);
+  $page_title = trim(strip_tags(mysqli_real_escape_string($mysqli,$_GET['page'])));
 
   if(preg_match('/[^a-z_\-0-9]/i', $page_title)){
     echo "We Don't allow those types of characters";
