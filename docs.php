@@ -49,7 +49,7 @@ include("header.php");
 		<?php
 			if(isset($_GET['doc'])){
 		
-				$doc = SeoUrl($_GET['doc']);
+				$doc = SeoUrl(strip_tags(mysqli_real_escape_string($mysqli,$_GET['doc'])));
 				
 				$query = mysqli_query($mysqli,"SELECT * FROM docs LEFT JOIN categories ON doc_category_id = category_id WHERE doc_url_title = '$doc'");
 				
