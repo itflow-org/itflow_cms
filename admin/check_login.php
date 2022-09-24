@@ -21,7 +21,7 @@
 	$session_user_email = $row['user_email'];
 	$session_username = $row['user_name'];
 	
-	$session_user_ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-  $session_user_agent = $_SERVER['HTTP_USER_AGENT'];
+	$session_user_ip = strip_tags(mysqli_real_escape_string($mysqli,$_SERVER['HTTP_X_FORWARDED_FOR']));
+	$session_user_agent = strip_tags(mysqli_real_escape_string($mysqli,$_SERVER['HTTP_USER_AGENT']));
 
 ?>

@@ -8,7 +8,7 @@
 	include("check_login.php");
 	
 	if(isset($_GET['topic'])){
-  	$post_title_url = SeoUrl($_GET['topic']);
+  	$post_title_url = SeoUrl(strip_tags(mysqli_real_escape_string($mysqli,$_GET['topic'])));
   	
   	$sql_posts = mysqli_query($mysqli,"SELECT * FROM posts LEFT JOIN users ON post_by = user_id WHERE post_title_url = '$post_title_url'");
   	$row = mysqli_fetch_array($sql_posts);
