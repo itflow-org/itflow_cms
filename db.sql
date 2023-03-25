@@ -178,6 +178,29 @@ CREATE TABLE `replies` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+-- Table structure for table `settings`
+--
+
+DROP TABLE IF EXISTS `settings`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `settings` (
+  `setting_id` int(11) NOT NULL AUTO_INCREMENT,
+  `config_site_name` varchar(200) NOT NULL,
+  `config_meta_author` varchar(200) DEFAULT NULL,
+  `config_meta_description` text DEFAULT NULL,
+  `config_theme` varchar(200) DEFAULT NULL,
+  `config_date_time_format` varchar(30) NOT NULL,
+  `config_footer_right` varchar(200) DEFAULT NULL,
+  `config_module_docs_enabled` tinyint(1) NOT NULL DEFAULT 0,
+  `config_module_forum_enabled` tinyint(1) NOT NULL DEFAULT 0,
+  `config_module_blog_enabled` tinyint(1) NOT NULL DEFAULT 0,
+  `config_module_user_registration_enabled` tinyint(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`setting_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `users`
 --
 
@@ -208,4 +231,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-24 22:46:34
+-- Dump completed on 2023-03-25  1:30:58
