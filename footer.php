@@ -2,11 +2,6 @@
 		<footer class="footer border-top" id="sticky-footer">
 		  <div class="container">
 		    <span class="text-muted"><?php echo $config_site_name; ?> <?php echo date('Y'); ?></span>
-		    <span>
-		    	<?php if(!empty($config_social_github)){ ?><a href="<?php echo $config_social_github; ?>" target="_blank"><i class="fab fa-fw fa-github text-dark"></i></a><?php } ?>
-		    	<?php if(!empty($config_social_twitter)){ ?><a href="<?php echo $config_social_twitter; ?>" target="_blank"><i class="fab fa-fw fa-twitter text-dark"></i></a><?php } ?>
-		    	<?php if(!empty($config_social_reddit)){ ?><a href="<?php echo $config_social_reddit; ?>" target="_blank"><i class="fab fa-fw fa-reddit text-dark"></i></a><?php } ?>
-		    </span>
 		    <span class="float-right"><?php echo $config_footer_right; ?></span>
 		  </div>
 		</footer>

@@ -24,14 +24,7 @@ if(isset($_GET['category_id'])){
 	</ol>
 </nav>
 
-<?php 
-
-	if(isset($_SESSION['response'])){
-		echo htmlentities($_SESSION['response']);
-		$_SESSION['response'] = '';
-	}
-
-?>
+<?php include("inc_alert.php"); ?>
 
 <form action="post.php" method="post">
 	<input type="hidden" name="category_id" value="<?php echo $category_id; ?>">

@@ -1,6 +1,6 @@
 
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-  <div class="navbar-brand">Admin Panel</div>
+  <div class="navbar-brand"><?php echo $config_site_name; ?> <small>Admin Panel</small></div>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -28,11 +28,12 @@
         <a class="nav-link <?php if(basename($_SERVER["PHP_SELF"]) == "docs.php" OR basename($_SERVER["PHP_SELF"]) == "add_doc.php" OR basename($_SERVER["PHP_SELF"]) == "edit_doc.php") { echo "active"; } ?>" href="docs.php">Docs</a>
       </li>
       <?php } ?>
-      <?php if($config_module_uploads_enabled == 1){ ?>
       <li class="nav-item">
         <a class="nav-link <?php if(basename($_SERVER["PHP_SELF"]) == "files.php") { echo "active"; } ?>" href="files.php">Files</a>
       </li>
-      <?php } ?>
+      <li class="nav-item">
+        <a class="nav-link <?php if(basename($_SERVER["PHP_SELF"]) == "settings.php") { echo "active"; } ?>" href="settings.php">Settings</a>
+      </li>
     </ul>
     <ul class="navbar-nav">
       <li class="nav-item dropdown">

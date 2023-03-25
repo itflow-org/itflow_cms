@@ -1,8 +1,8 @@
 <?php
 	
-	session_start();
+session_start();
 
-  if(isset($_SESSION['logged'])){
+if(isset($_SESSION['logged'])){
 
   	$session_user_id = $_SESSION['user_id'];
 
@@ -13,6 +13,6 @@
 	$session_user_access = intval($row['user_access']);
 	$session_user_ip = strip_tags(mysqli_real_escape_string($mysqli,$_SERVER['HTTP_X_FORWARDED_FOR']));
 	$session_user_agent = strip_tags(mysqli_real_escape_string($mysqli,$_SERVER['HTTP_USER_AGENT']));
-	}
+}
 
 ?>

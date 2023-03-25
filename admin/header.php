@@ -1,3 +1,6 @@
+<?php include("functions.php"); ?>
+<?php include("../get_settings.php"); ?>
+
 <!doctype html>
 <html lang="en">
 	<head>

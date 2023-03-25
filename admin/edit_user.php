@@ -26,14 +26,7 @@ if(isset($_GET['user_id'])){
 	</ol>
 </nav>
 
-<?php 
-
-	if(isset($_SESSION['response'])){
-		echo htmlentities($_SESSION['response']);
-		$_SESSION['response'] = '';
-	}
-
-?>
+<?php include("inc_alert.php"); ?>
 
 <form action="post.php" method="post" enctype="multipart/form-data">
 	<input type="hidden" name="user_id" value="<?php echo $user_id; ?>">

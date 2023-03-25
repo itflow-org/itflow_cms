@@ -26,14 +26,7 @@ if(isset($_GET['doc_id'])){
 	</ol>
 </nav>
 
-<?php 
-
-	if(isset($_SESSION['response'])){
-		echo $_SESSION['response'];
-		$_SESSION['response'] = '';
-	}
-
-?>
+<?php include("inc_alert.php"); ?>
 
 <form action="post.php" method="post">
 	<input type="hidden" name="doc_id" value="<?php echo $doc_id; ?>">

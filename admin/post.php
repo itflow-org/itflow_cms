@@ -3,6 +3,7 @@
 include("functions.php");
 include("../config.php");
 include("check_login.php");
+include("../get_settings.php");
 
 if(isset($_POST['add_blog'])){
 	$title = trim(strip_tags(mysqli_real_escape_string($mysqli,$_POST['title'])));
@@ -23,14 +24,7 @@ if(isset($_POST['edit_blog'])){
 
 	mysqli_query($mysqli,"UPDATE blog SET blog_title = '$title', blog_url_title = '$url_title', blog_content = '$content' WHERE blog_id = $blog_id");
 
-	$_SESSION['response'] = "
-		<div class='alert alert-info'>
-		    Blog updated.
-		    <button class='close' data-dismiss='alert'>
-				<span>&times;</span>
-			</button>
-		</div>
-	";
+	$_SESSION['response'] = "Blog updated.";
 
 	header("Location: edit_blog.php?blog_id=$blog_id");
 
@@ -66,14 +60,7 @@ if(isset($_POST['edit_doc'])){
 
 	mysqli_query($mysqli,"UPDATE docs SET doc_url_title = '$url_title', doc_title = '$title', doc_content = '$content', doc_updated_by = $session_user_id, doc_category_id = $category_id WHERE doc_id = $doc_id");
 
-	$_SESSION['response'] = "
-		<div class='alert alert-info'>
-		    Doc updated.
-		    <button class='close' data-dismiss='alert'>
-				<span>&times;</span>
-			</button>
-		</div>
-	";
+	$_SESSION['response'] = "Doc updated.";
 
 	header("Location: edit_doc.php?doc_id=$doc_id");
 
@@ -108,14 +95,7 @@ if(isset($_POST['edit_page'])){
 
 	mysqli_query($mysqli,"UPDATE pages SET page_title = '$title', page_url_title = '$url_title', page_content = '$content' WHERE page_id = $page_id");
 
-	$_SESSION['response'] = "
-		<div class='alert alert-info'>
-		    Page updated.
-		    <button class='close' data-dismiss='alert'>
-				<span>&times;</span>
-			</button>
-		</div>
-	";
+	$_SESSION['response'] = "Page updated.";
 
 	header("Location: edit_page.php?page_id=$page_id");
 
@@ -151,14 +131,7 @@ if(isset($_POST['edit_link'])){
 
 	mysqli_query($mysqli,"UPDATE links SET link_name = '$name', link_icon = '$icon', link_url = '$url', link_order = $order WHERE link_id = $link_id");
 
-	$_SESSION['response'] = "
-		<div class='alert alert-info'>
-		    Link updated.
-		    <button class='close' data-dismiss='alert'>
-				<span>&times;</span>
-			</button>
-		</div>
-	";
+	$_SESSION['response'] = "Link updated.";
 
 	header("Location: links.php");
 
@@ -188,14 +161,7 @@ if(isset($_POST['edit_category'])){
 
 	mysqli_query($mysqli,"UPDATE categories SET category_name = '$name' WHERE category_id = $category_id");
 
-	$_SESSION['response'] = "
-		<div class='alert alert-info'>
-		    Category updated.
-		    <button class='close' data-dismiss='alert'>
-				<span>&times;</span>
-			</button>
-		</div>
-	";
+	$_SESSION['response'] = "Category updated.";
 
 	header("Location: categories.php");
 
@@ -206,14 +172,7 @@ if(isset($_GET['delete_category'])){
 
 	mysqli_query($mysqli,"DELETE FROM categories WHERE category_id = $category_id");
 
-	$_SESSION['response'] = "
-		<div class='alert alert-danger'>
-		    Category deleted.
-		    <button class='close' data-dismiss='alert'>
-				<span>&times;</span>
-			</button>
-		</div>
-	";
+	$_SESSION['response'] = "Category deleted."
 
 	header("Location: categories.php");
 
@@ -235,17 +194,17 @@ if(isset($_POST['add_file'])){
 }
 
 if(isset($_GET['delete_file'])){
-  $file_id = intval($_GET['delete_file']);
+    $file_id = intval($_GET['delete_file']);
 
-  $sql_file = mysqli_query($mysqli,"SELECT * FROM files WHERE file_id = $file_id");
-  $row = mysqli_fetch_array($sql_file);
-  $file_name = $row['file_name'];
+    $sql_file = mysqli_query($mysqli,"SELECT * FROM files WHERE file_id = $file_id");
+    $row = mysqli_fetch_array($sql_file);
+    $file_name = $row['file_name'];
 
-  unlink("/upload/$file_name");
+    unlink("/upload/$file_name");
 
-  mysqli_query($mysqli,"DELETE FROM files WHERE file_id = $file_id");
-  
-  header("Location: " . $_SERVER["HTTP_REFERER"]);
+    mysqli_query($mysqli,"DELETE FROM files WHERE file_id = $file_id");
+
+    header("Location: " . $_SERVER["HTTP_REFERER"]);
   
 }
 
@@ -257,14 +216,7 @@ if(isset($_POST['add_user'])){
 
 	mysqli_query($mysqli,"INSERT INTO users SET user_name = '$name', user_email = '$email', user_password = '$password', user_access = $access");
 
-	$_SESSION['response'] = "
-		<div class='alert alert-success'>
-		    User added.
-		    <button class='close' data-dismiss='alert'>
-				<span>&times;</span>
-			</button>
-		</div>
-	";
+	$_SESSION['response'] = "User added.";
 
 	header("Location: users.php");
 
@@ -274,14 +226,14 @@ if(isset($_POST['edit_user'])){
 	$user_id = intval($_POST['user_id']);
 	$name = trim(strip_tags(mysqli_real_escape_string($mysqli,$_POST['name'])));
 	$email = trim(strip_tags(mysqli_real_escape_string($mysqli,$_POST['email'])));
-  $password = $_POST['password'];
+    $password = trim($_POST['password']);
 	$access = intval($_POST['access']);
 
 	mysqli_query($mysqli,"UPDATE users SET user_name = '$name', user_email = '$email', user_access = $access WHERE user_id = $user_id");
 
 	if(!empty($password)){
-      $password = password_hash($password, PASSWORD_DEFAULT);
-      mysqli_query($mysqli,"UPDATE users SET user_password = '$password' WHERE user_id = $user_id");
+        $password = password_hash($password, PASSWORD_DEFAULT);
+        mysqli_query($mysqli,"UPDATE users SET user_password = '$password' WHERE user_id = $user_id");
   }
 
 	header("Location: users.php");
@@ -302,6 +254,25 @@ if(isset($_GET['approve_user'])){
 
   mysqli_query($mysqli,"UPDATE users SET user_access = 1 WHERE user_id = $user_id");
   echo "<script>window.location = 'users.php'</script>";
+}
+
+if(isset($_POST['edit_settings'])){
+	$site_name = trim(strip_tags(mysqli_real_escape_string($mysqli,$_POST['site_name'])));
+	$author = trim(strip_tags(mysqli_real_escape_string($mysqli,$_POST['author'])));
+	$description = trim(strip_tags(mysqli_real_escape_string($mysqli,$_POST['description'])));
+	$theme = trim(strip_tags(mysqli_real_escape_string($mysqli,$_POST['theme'])));
+	$date_time_format = trim(strip_tags(mysqli_real_escape_string($mysqli,$_POST['date_time_format'])));
+	$docs_enabled = intval($_POST['docs_enabled']);
+	$forum_enabled = intval($_POST['forum_enabled']);
+	$blog_enabled = intval($_POST['blog_enabled']);
+	$user_registration_enabled = intval($_POST['user_registration_enabled']);
+
+	mysqli_query($mysqli,"UPDATE settings SET config_site_name = '$site_name', config_meta_author = '$author', config_meta_description = '$description', config_theme = '$theme', config_date_time_format = '$date_time_format', config_module_docs_enabled = $docs_enabled, config_module_forum_enabled = $forum_enabled, config_module_blog_enabled = $blog_enabled, config_module_user_registration_enabled = $user_registration_enabled WHERE setting_id = 1");
+
+	$_SESSION['response'] = "Settings updated.";
+
+	header("Location: settings.php");
+
 }
 
 ?>

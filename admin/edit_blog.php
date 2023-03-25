@@ -25,14 +25,7 @@ if(isset($_GET['blog_id'])){
 	</ol>
 </nav>
 
-<?php 
-
-	if(isset($_SESSION['response'])){
-		echo htmlentities($_SESSION['response']);
-		$_SESSION['response'] = '';
-	}
-
-?>
+<?php include("inc_alert.php"); ?>
 
 <form action="post.php" method="post">
 	<input type="hidden" name="blog_id" value="<?php echo $blog_id; ?>">

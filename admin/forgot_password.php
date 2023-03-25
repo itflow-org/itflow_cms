@@ -9,13 +9,7 @@ session_start();
 
 <h1 class="text-center">Forgot Password</h1>
 
-<?php 
-
-	if(isset($_SESSION['response'])){
-		echo $_SESSION['response'];
-	}
-
-?>
+<?php include("inc_alert.php"); ?>
 
 <form action="unprotected_post.php" method="post">
 	
