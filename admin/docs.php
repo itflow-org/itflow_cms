@@ -43,7 +43,8 @@ $query = mysqli_query($mysqli,"SELECT SQL_CALC_FOUND_ROWS * FROM docs
 	LEFT JOIN categories ON category_id = doc_category_id
 	WHERE doc_title LIKE '%$search%' OR category_name LIKE '%$search%'
 	ORDER BY $sortby $order
-	LIMIT $record_from, $record_to"); 
+	LIMIT $record_from, $record_to"
+); 
 
 $num_rows = mysqli_fetch_row(mysqli_query($mysqli,"SELECT FOUND_ROWS()"));
 
@@ -56,7 +57,7 @@ $num_rows = mysqli_fetch_row(mysqli_query($mysqli,"SELECT FOUND_ROWS()"));
 <form>
 	<div class="form-row">
 		<div class="input-group col-md-10 mb-3">
-			<input type="text" class="form-control col-md-5" name="search" value="<?php echo $search; ?>" placeholder="Search...">
+			<input type="text" class="form-control col-md-5" name="search" value="<?php echo stripslashes(htmlentities($search)); ?>" placeholder="Search...">
 			<div class="input-group-append">
 				<button class="btn btn-outline-secondary">Search</button>
 			</div>
@@ -85,13 +86,13 @@ $num_rows = mysqli_fetch_row(mysqli_query($mysqli,"SELECT FOUND_ROWS()"));
 
 			while($row = mysqli_fetch_array($query)){
 			
-			$doc_id = $row['doc_id'];
-			$title = $row['doc_title'];
-			$url_title = $row['doc_url_title'];
-			$created_at = $row['doc_created_at'];
-			$updated_at = $row['doc_updated_at'];
-			$category_id = $row['category_id'];
-			$category_name = $row['category_name'];
+			$doc_id = intval($row['doc_id']);
+			$title = htmlentities($row['doc_title']);
+			$url_title = htmlentities($row['doc_url_title']);
+			$created_at = htmlentities($row['doc_created_at']);
+			$updated_at = htmlentities($row['doc_updated_at']);
+			$category_id = intval($row['category_id']);
+			$category_name = htmlentities($row['category_name']);
 		
 			?>
 			

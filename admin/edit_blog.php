@@ -13,8 +13,8 @@ if(isset($_GET['blog_id'])){
 	
 	$row = mysqli_fetch_array($query);
 	
-	$title = $row['blog_title'];
-	$content = $row['blog_content'];
+	$title = htmlentities($row['blog_title']);
+	$content = htmlentities($row['blog_content']);
 
 ?>
 
@@ -28,7 +28,7 @@ if(isset($_GET['blog_id'])){
 <?php 
 
 	if(isset($_SESSION['response'])){
-		echo $_SESSION['response'];
+		echo htmlentities($_SESSION['response']);
 		$_SESSION['response'] = '';
 	}
 

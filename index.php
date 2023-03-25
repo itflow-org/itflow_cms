@@ -2,6 +2,12 @@
 
 <?php
   
+//Initialize the HTML Purifier to prevent XSS
+require("plugins/htmlpurifier/HTMLPurifier.standalone.php");
+$purifier_config = HTMLPurifier_Config::createDefault();
+$purifier_config->set('URI.AllowedSchemes', ['data' => true, 'src' => true, 'http' => true, 'https' => true]);
+$purifier = new HTMLPurifier($purifier_config);
+
 if(isset($_GET['page'])){
 
   $page_title = trim(strip_tags(mysqli_real_escape_string($mysqli,$_GET['page'])));
@@ -15,8 +21,8 @@ if(isset($_GET['page'])){
     
     $row = mysqli_fetch_array($query);
     
-    $title = $row['page_title'];
-    $content = $row['page_content'];
+    $title = htmlentities($row['page_title']);
+    $content = $purifier->purify($row['page_content']);
 
     echo $content;
 
@@ -27,8 +33,8 @@ if(isset($_GET['page'])){
   
   $row = mysqli_fetch_array($query);
   
-  $title = $row['page_title'];
-  $content = $row['page_content'];
+  $title = htmlentities($row['page_title']);
+  $content = $purifier->purify($row['page_content']);
 
   echo $content;
 }

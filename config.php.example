@@ -29,10 +29,7 @@
 	$config_module_docs_enabled = 1;
 	$config_module_forum_enabled = 1;
 	$config_module_blog_enabled = 1;
-	$config_module_polls_enabled = 1;
-	$config_module_forms_enabled = 1;
 	$config_module_uploads_enabled = 1;
-	$config_module_stats_enabled = 1;
 	$config_module_forgot_password_enabled = 0;
 	$config_module_user_registration_enabled = 1;
 	$config_module_user_registration_auto_activation_enabled = 1;

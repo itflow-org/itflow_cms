@@ -21,8 +21,18 @@ include("nav.php");
 	</div>
 
 	<div class="form-group">
+		<label>Icon</label>
+		<input type="text" class="form-control" name="icon" placeholder="Icon eg fab fa-google">
+	</div>
+
+	<div class="form-group">
 		<label>URL</label>
 		<input type="text" class="form-control" name="url" placeholder="URL with https://" required>
+	</div>
+
+	<div class="form-group">
+		<label>Order</label>
+		<input type="number" class="form-control" name="order" placeholder="Order number">
 	</div>
 	
 	<button type="submit" class="btn btn-primary btn-block" name="add_link">Create</button>

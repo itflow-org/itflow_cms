@@ -13,8 +13,8 @@ if(isset($_POST['login'])){
   $row = mysqli_fetch_array($sql);
   if(password_verify($password, $row['user_password'])){
     $_SESSION['logged'] = TRUE;
-    $_SESSION['user_id'] = $row['user_id'];
-    $_SESSION['user_access'] = $row['user_access'];
+    $_SESSION['user_id'] = intval($row['user_id']);
+    $_SESSION['user_access'] = intval($row['user_access']);
     header("Location: index.php");
   }else{
     $response = 
@@ -40,7 +40,7 @@ if(isset($_POST['login'])){
   <?php 
     
   if(isset($response)){
-    echo "$response";
+    echo htmlentities($response);
   }
     
   ?>

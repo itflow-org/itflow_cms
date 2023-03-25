@@ -55,7 +55,7 @@ $num_rows = mysqli_fetch_row(mysqli_query($mysqli,"SELECT FOUND_ROWS()"));
 <form>
 	<div class="form-row">
 		<div class="input-group col-md-10 mb-3">
-			<input type="text" class="form-control col-md-5" name="search" value="<?php echo $search; ?>" placeholder="Search...">
+			<input type="text" class="form-control col-md-5" name="search" value="<?php echo stripslashes(htmlentities($search)); ?>" placeholder="Search...">
 			<div class="input-group-append">
 				<button class="btn btn-outline-secondary">Search</button>
 			</div>
@@ -72,6 +72,8 @@ $num_rows = mysqli_fetch_row(mysqli_query($mysqli,"SELECT FOUND_ROWS()"));
 		<thead class="thead-light">
 			<tr>
 				<th><a class="text-secondary" href="?<?php echo $url_query_strings_sb; ?>&sortby=link_name&order=<?php echo $order; ?>">Name</a></th>
+				<th>Icon</th>
+				<th><a class="text-secondary" href="?<?php echo $url_query_strings_sb; ?>&sortby=link_order&order=<?php echo $order; ?>">Order</a></th>
 				<th><a class="text-secondary" href="?<?php echo $url_query_strings_sb; ?>&sortby=link_url_at&order=<?php echo $order; ?>">URL</a></th>
 				<th class="text-center">Action</th>
 			</tr>
@@ -82,9 +84,11 @@ $num_rows = mysqli_fetch_row(mysqli_query($mysqli,"SELECT FOUND_ROWS()"));
 
 			while($row = mysqli_fetch_array($query)){
 			
-			$link_id = $row['link_id'];
-			$name = $row['link_name'];
-			$url = $row['link_url'];
+			$link_id = intval($row['link_id']);
+			$name = htmlentities($row['link_name']);
+			$icon = htmlentities($row['link_icon']);
+			$url = htmlentities($row['link_url']);
+			$order = intval($row['link_order']);
 		
 			?>
 			
@@ -94,6 +98,8 @@ $num_rows = mysqli_fetch_row(mysqli_query($mysqli,"SELECT FOUND_ROWS()"));
 			 			<?php echo $name; ?>
 			 		</a>
 			 	</td>
+			 	<td><?php if(!empty($icon)) { echo "<i class='$icon fa-fw fa-2x'></i>"; } ?></td>
+			 	<td><?php echo $order; ?></td>
 				<td><?php echo $url; ?></td>
 			 	<td>
           <div class="dropdown dropleft text-center">

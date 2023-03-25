@@ -13,9 +13,9 @@ if(isset($_GET['user_id'])){
 	
 	$row = mysqli_fetch_array($query);
 	
-	$name = $row['user_name'];
-	$email = $row['user_email'];
-	$access = $row['user_access'];
+	$name = htmlentities($row['user_name']);
+	$email = htmlentities($row['user_email']);
+	$access = intval($row['user_access']);
 
 ?>
 
@@ -29,7 +29,7 @@ if(isset($_GET['user_id'])){
 <?php 
 
 	if(isset($_SESSION['response'])){
-		echo $_SESSION['response'];
+		echo htmlentities($_SESSION['response']);
 		$_SESSION['response'] = '';
 	}
 

@@ -56,7 +56,7 @@ $num_rows = mysqli_fetch_row(mysqli_query($mysqli,"SELECT FOUND_ROWS()"));
 <form>
 	<div class="form-row">
 		<div class="input-group col-md-10 mb-3">
-			<input type="text" class="form-control col-md-5" name="search" value="<?php echo $search; ?>" placeholder="Search...">
+			<input type="text" class="form-control col-md-5" name="search" value="<?php echo stripslashes(htmlentities($search)); ?>" placeholder="Search...">
 			<div class="input-group-append">
 				<button class="btn btn-outline-secondary">Search</button>
 			</div>
@@ -84,10 +84,10 @@ $num_rows = mysqli_fetch_row(mysqli_query($mysqli,"SELECT FOUND_ROWS()"));
 
 			while($row = mysqli_fetch_array($query)){
 			
-			$blog_id = $row['blog_id'];
-			$title = $row['blog_title'];
-			$date = $row['blog_date'];
-			$name = $row['user_name'];
+			$blog_id = intval($row['blog_id']);
+			$title = htmlentities($row['blog_title']);
+			$date = htmlentities($row['blog_date']);
+			$name = htmlentities($row['user_name']);
 
 			?>
 			

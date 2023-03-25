@@ -13,8 +13,10 @@ if(isset($_GET['link_id'])){
 	
 	$row = mysqli_fetch_array($query);
 	
-	$name = $row['link_name'];
-	$url = $row['link_url'];
+	$name = htmlentities($row['link_name']);
+	$icon = htmlentities($row['link_icon']);
+	$url = htmlentities($row['link_url']);
+	$order = intval($row['link_order']);
 
 ?>
 
@@ -28,7 +30,7 @@ if(isset($_GET['link_id'])){
 <?php 
 
 	if(isset($_SESSION['response'])){
-		echo $_SESSION['response'];
+		echo htmlentities($_SESSION['response']);
 		$_SESSION['response'] = '';
 	}
 
@@ -42,8 +44,18 @@ if(isset($_GET['link_id'])){
 	</div>
 
 	<div class="form-group">
+		<label>Icon</label>
+		<input type="text" class="form-control" name="icon" value="<?php echo $icon; ?>">
+	</div>
+
+	<div class="form-group">
 		<label>URL</label>
 		<input type="text" class="form-control" name="url" value="<?php echo $url; ?>">
+	</div>
+
+	<div class="form-group">
+		<label>Order</label>
+		<input type="number" class="form-control" name="order" value="<?php echo $order; ?>">
 	</div>
 
 	<button type="submit" class="btn btn-primary btn-block" name="edit_link">Save</button>

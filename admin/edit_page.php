@@ -3,7 +3,7 @@
 include("../config.php");
 include("check_login.php");
 include("header.php");
-include("nav.php"); 
+include("nav.php");
 
 if(isset($_GET['page_id'])){
 	
@@ -13,8 +13,8 @@ if(isset($_GET['page_id'])){
 	
 	$row = mysqli_fetch_array($query);
 	
-	$title = $row['page_title'];
-	$content = $row['page_content'];
+	$title = htmlentities($row['page_title']);
+	$content = htmlentities($row['page_content']);
 
 ?>
 
@@ -28,7 +28,7 @@ if(isset($_GET['page_id'])){
 <?php 
 
 	if(isset($_SESSION['response'])){
-		echo $_SESSION['response'];
+		echo htmlentities($_SESSION['response']);
 		$_SESSION['response'] = '';
 	}
 

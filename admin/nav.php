@@ -28,24 +28,9 @@
         <a class="nav-link <?php if(basename($_SERVER["PHP_SELF"]) == "docs.php" OR basename($_SERVER["PHP_SELF"]) == "add_doc.php" OR basename($_SERVER["PHP_SELF"]) == "edit_doc.php") { echo "active"; } ?>" href="docs.php">Docs</a>
       </li>
       <?php } ?>
-      <?php if($config_module_polls_enabled == 1){ ?>
-      <li class="nav-item">
-        <a class="nav-link <?php if(basename($_SERVER["PHP_SELF"]) == "polls.php" OR basename($_SERVER["PHP_SELF"]) == "add_poll.php" OR basename($_SERVER["PHP_SELF"]) == "edit_poll.php") { echo "active"; } ?>" href="polls.php">Polls</a>
-      </li>
-      <?php } ?>
-      <?php if($config_module_forms_enabled == 1){ ?>
-      <li class="nav-item">
-        <a class="nav-link <?php if(basename($_SERVER["PHP_SELF"]) == "forms.php" OR basename($_SERVER["PHP_SELF"]) == "add_form.php" OR basename($_SERVER["PHP_SELF"]) == "edit_form.php") { echo "active"; } ?>" href="forms.php">Forms</a>
-      </li>
-      <?php } ?>
       <?php if($config_module_uploads_enabled == 1){ ?>
       <li class="nav-item">
         <a class="nav-link <?php if(basename($_SERVER["PHP_SELF"]) == "files.php") { echo "active"; } ?>" href="files.php">Files</a>
-      </li>
-      <?php } ?>
-      <?php if($config_module_stats_enabled == 1){ ?>
-      <li class="nav-item">
-        <a class="nav-link <?php if(basename($_SERVER["PHP_SELF"]) == "stats.php") { echo "active"; } ?>" href="stats.php">Stats</a>
       </li>
       <?php } ?>
     </ul>

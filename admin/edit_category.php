@@ -13,7 +13,7 @@ if(isset($_GET['category_id'])){
 	
 	$row = mysqli_fetch_array($query);
 	
-	$name = $row['category_name'];
+	$name = htmlentities($row['category_name']);
 
 ?>
 
@@ -27,7 +27,7 @@ if(isset($_GET['category_id'])){
 <?php 
 
 	if(isset($_SESSION['response'])){
-		echo $_SESSION['response'];
+		echo htmlentities($_SESSION['response']);
 		$_SESSION['response'] = '';
 	}
 

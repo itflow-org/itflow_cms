@@ -57,7 +57,7 @@ $num_rows = mysqli_fetch_row(mysqli_query($mysqli,"SELECT FOUND_ROWS()"));
 <form>
 	<div class="form-row">
 		<div class="input-group col-md-10 mb-3">
-			<input type="text" class="form-control col-md-5" name="search" value="<?php echo $search; ?>" placeholder="Search...">
+			<input type="text" class="form-control col-md-5" name="search" value="<?php echo stripslashes(htmlentities($search)); ?>" placeholder="Search...">
 			<div class="input-group-append">
 				<button class="btn btn-dark"><i class="fas fa-fw fa-search"></i></button>
 			</div>
@@ -88,13 +88,13 @@ $num_rows = mysqli_fetch_row(mysqli_query($mysqli,"SELECT FOUND_ROWS()"));
 
 			while($row = mysqli_fetch_array($query)){
 				
-				$user_id = $row['user_id'];
-				$email = $row['user_email'];
-				$username = $row['user_name'];
-        $user_access = $row['user_access'];
-        $ip = $row['event_ip'];
-        $user_agent = $row['event_user_agent'];
-        $event_timestamp = $row['event_timestamp'];
+				$user_id = intval($row['user_id']);
+				$email = htmlentities($row['user_email']);
+				$username = htmlentities($row['user_name']);
+        $user_access = intval($row['user_access']);
+        $ip = htmlentities($row['event_ip']);
+        $user_agent = htmlentities($row['event_user_agent']);
+        $event_timestamp = htmlentities($row['event_timestamp']);
 				
 				?>
 			

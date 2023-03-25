@@ -6,10 +6,10 @@ include("check_login.php");
 
 if(isset($_POST['add_blog'])){
 	$title = trim(strip_tags(mysqli_real_escape_string($mysqli,$_POST['title'])));
-	$content = trim(mysqli_real_escape_string($mysqli,$_POST['content']));
+	$content = mysqli_real_escape_string($mysqli,$_POST['content']);
 	$url_title = SeoUrl($title);
 
-	mysqli_query($mysqli,"INSERT INTO blog SET blog_title = '$title', blog_url_title = '$url_title', blog_content = '$content', blog_date = NOW(), blog_by = $session_user_id") OR DIE("ERROR!");
+	mysqli_query($mysqli,"INSERT INTO blog SET blog_title = '$title', blog_url_title = '$url_title', blog_content = '$content', blog_by = $session_user_id");
 
 	header("Location: blogs.php");
 
@@ -18,7 +18,7 @@ if(isset($_POST['add_blog'])){
 if(isset($_POST['edit_blog'])){
 	$blog_id = intval($_POST['blog_id']);
 	$title = trim(strip_tags(mysqli_real_escape_string($mysqli,$_POST['title'])));
-	$content = trim(mysqli_real_escape_string($mysqli,$_POST['content']));
+	$content = mysqli_real_escape_string($mysqli,$_POST['content']);
 	$url_title = SeoUrl($title);
 
 	mysqli_query($mysqli,"UPDATE blog SET blog_title = '$title', blog_url_title = '$url_title', blog_content = '$content' WHERE blog_id = $blog_id");
@@ -47,11 +47,11 @@ if(isset($_GET['delete_blog'])){
 
 if(isset($_POST['add_doc'])){
 	$title = trim(strip_tags(mysqli_real_escape_string($mysqli,$_POST['title'])));
-	$content = trim(mysqli_real_escape_string($mysqli,$_POST['content']));
+	$content = mysqli_real_escape_string($mysqli,$_POST['content']);
 	$category_id = intval($_POST['category']);
 	$url_title = SeoUrl($title);
 
-	mysqli_query($mysqli,"INSERT INTO docs SET doc_url_title = '$url_title', doc_title = '$title', doc_content = '$content', doc_created_by = $session_user_id, doc_created_at = NOW(), doc_category_id = $category_id") OR DIE("ERROR!");
+	mysqli_query($mysqli,"INSERT INTO docs SET doc_url_title = '$url_title', doc_title = '$title', doc_content = '$content', doc_created_by = $session_user_id, doc_category_id = $category_id");
 
 	header("Location: docs.php");
 
@@ -60,11 +60,11 @@ if(isset($_POST['add_doc'])){
 if(isset($_POST['edit_doc'])){
 	$doc_id = intval($_POST['doc_id']);
 	$title = trim(strip_tags(mysqli_real_escape_string($mysqli,$_POST['title'])));
-	$content = trim(mysqli_real_escape_string($mysqli,$_POST['content']));
+	$content = mysqli_real_escape_string($mysqli,$_POST['content']);
 	$category_id = intval($_POST['category']);
 	$url_title = SeoUrl($title);
 
-	mysqli_query($mysqli,"UPDATE docs SET doc_url_title = '$url_title', doc_title = '$title', doc_content = '$content', doc_updated_by = $session_user_id, doc_updated_at = NOW(), doc_category_id = $category_id WHERE doc_id = $doc_id");
+	mysqli_query($mysqli,"UPDATE docs SET doc_url_title = '$url_title', doc_title = '$title', doc_content = '$content', doc_updated_by = $session_user_id, doc_category_id = $category_id WHERE doc_id = $doc_id");
 
 	$_SESSION['response'] = "
 		<div class='alert alert-info'>
@@ -91,10 +91,10 @@ if(isset($_GET['delete_doc'])){
 if(isset($_POST['add_page'])){
 	$order = intval($_POST['order']);
 	$title = trim(strip_tags(mysqli_real_escape_string($mysqli,$_POST['title'])));
-	$content = trim(mysqli_real_escape_string($mysqli,$_POST['content']));
+	$content = mysqli_real_escape_string($mysqli,$_POST['content']);
 	$url_title = SeoUrl($title);
 
-	mysqli_query($mysqli,"INSERT INTO pages SET page_title = '$title', page_url_title = '$url_title', page_content = '$content', page_order = $order, page_created_at = NOW(), page_created_by = $session_user_id, page_active = 1") OR DIE("ERROR!");
+	mysqli_query($mysqli,"INSERT INTO pages SET page_title = '$title', page_url_title = '$url_title', page_content = '$content', page_order = $order, page_created_by = $session_user_id, page_active = 1");
 
 	header("Location: pages.php");
 
@@ -103,10 +103,10 @@ if(isset($_POST['add_page'])){
 if(isset($_POST['edit_page'])){
 	$page_id = intval($_POST['page_id']);
 	$title = trim(strip_tags(mysqli_real_escape_string($mysqli,$_POST['title'])));
-	$content = trim(mysqli_real_escape_string($mysqli,$_POST['content']));
+	$content = mysqli_real_escape_string($mysqli,$_POST['content']);
 	$url_title = SeoUrl($title);
 
-	mysqli_query($mysqli,"UPDATE pages SET page_title = '$title', page_url_title = '$url_title', page_content = '$content', page_updated_at = NOW() WHERE page_id = $page_id");
+	mysqli_query($mysqli,"UPDATE pages SET page_title = '$title', page_url_title = '$url_title', page_content = '$content' WHERE page_id = $page_id");
 
 	$_SESSION['response'] = "
 		<div class='alert alert-info'>
@@ -132,9 +132,11 @@ if(isset($_GET['delete_page'])){
 
 if(isset($_POST['add_link'])){
 	$name = trim(strip_tags(mysqli_real_escape_string($mysqli,$_POST['name'])));
+	$icon = trim(strip_tags(mysqli_real_escape_string($mysqli,$_POST['icon'])));
 	$url = trim(mysqli_real_escape_string($mysqli,$_POST['url']));
+	$order = intval($_POST['order']);
 
-	mysqli_query($mysqli,"INSERT INTO links SET link_name = '$name', link_url = '$url'") OR DIE("ERROR!");
+	mysqli_query($mysqli,"INSERT INTO links SET link_name = '$name', link_icon = '$icon', link_url = '$url', link_order = $order");
 
 	header("Location: links.php");
 
@@ -143,9 +145,11 @@ if(isset($_POST['add_link'])){
 if(isset($_POST['edit_link'])){
 	$link_id = intval($_POST['link_id']);
 	$name = trim(strip_tags(mysqli_real_escape_string($mysqli,$_POST['name'])));
+	$icon = trim(strip_tags(mysqli_real_escape_string($mysqli,$_POST['icon'])));
 	$url = trim(mysqli_real_escape_string($mysqli,$_POST['url']));
+	$order = intval($_POST['order']);
 
-	mysqli_query($mysqli,"UPDATE links SET link_name = '$name', link_url = '$url' WHERE link_id = $link_id");
+	mysqli_query($mysqli,"UPDATE links SET link_name = '$name', link_icon = '$icon', link_url = '$url', link_order = $order WHERE link_id = $link_id");
 
 	$_SESSION['response'] = "
 		<div class='alert alert-info'>
@@ -224,7 +228,7 @@ if(isset($_POST['add_file'])){
     move_uploaded_file($_FILES['file']['tmp_name'], $path);
   }
 
-  mysqli_query($mysqli,"INSERT INTO files SET file_name = '$file_name', file_uploaded_at = NOW()");
+  mysqli_query($mysqli,"INSERT INTO files SET file_name = '$file_name'");
   
   header("Location: " . $_SERVER["HTTP_REFERER"]);
 
@@ -243,86 +247,6 @@ if(isset($_GET['delete_file'])){
   
   header("Location: " . $_SERVER["HTTP_REFERER"]);
   
-}
-
-if(isset($_POST['add_poll'])){
-	$name = trim(strip_tags(mysqli_real_escape_string($mysqli,$_POST['name'])));
-
-	mysqli_query($mysqli,"INSERT INTO polls SET poll_name = '$name', poll_created_at = NOW()") OR DIE("ERROR!");
-
-	header("Location: polls.php");
-
-}
-
-if(isset($_GET['delete_poll'])){
-	$poll_id = intval($_GET['delete_poll']);
-
-	mysqli_query($mysqli,"DELETE FROM poll_options WHERE option_poll_id = $poll_id");
-	mysqli_query($mysqli,"DELETE FROM polls WHERE poll_id = $poll_id");
-
-	header("Location: polls.php");
-
-}
-
-if(isset($_POST['add_option'])){
-	$poll_id = intval($_POST['poll_id']);
-	$name = trim(strip_tags(mysqli_real_escape_string($mysqli,$_POST['name'])));
-
-	mysqli_query($mysqli,"INSERT INTO poll_options SET option_name = '$name', option_poll_id = $poll_id") OR DIE("ERROR!");
-
-	header("Location: poll_options.php?poll_id=$poll_id");
-
-}
-
-if(isset($_GET['delete_option'])){
-	$option_id = intval($_GET['delete_option']);
-
-	mysqli_query($mysqli,"DELETE FROM poll_options WHERE option_id = $option_id");
-
-	header("Location: " . $_SERVER["HTTP_REFERER"]);
-
-}
-
-//Forms
-
-if(isset($_POST['add_form'])){
-	$name = trim(strip_tags(mysqli_real_escape_string($mysqli,$_POST['name'])));
-
-	mysqli_query($mysqli,"INSERT INTO forms SET form_name = '$name', form_created_at = NOW()") OR DIE("ERROR!");
-
-	header("Location: " . $_SERVER["HTTP_REFERER"]);
-
-}
-
-if(isset($_GET['delete_form'])){
-	$form_id = intval($_GET['delete_form']);
-
-	mysqli_query($mysqli,"DELETE FROM form_fields WHERE field_form_id = $form_id");
-	mysqli_query($mysqli,"DELETE FROM forms WHERE form_id = $form_id");
-
-	header("Location: " . $_SERVER["HTTP_REFERER"]);
-
-}
-
-if(isset($_POST['add_field'])){
-	$form_id = intval($_POST['form_id']);
-	$name = trim(strip_tags(mysqli_real_escape_string($mysqli,$_POST['name'])));
-	$type = trim(strip_tags(mysqli_real_escape_string($mysqli,$_POST['type'])));
-	$options = trim(strip_tags(mysqli_real_escape_string($mysqli,$_POST['options'])));
-
-	mysqli_query($mysqli,"INSERT INTO form_fields SET field_name = '$name', field_type = '$type', field_options = '$options', field_form_id = $form_id") OR DIE("ERROR!");
-
-	header("Location: " . $_SERVER["HTTP_REFERER"]);
-
-}
-
-if(isset($_GET['delete_field'])){
-	$field_id = intval($_GET['delete_field']);
-
-	mysqli_query($mysqli,"DELETE FROM form_fields WHERE field_id = $field_id");
-
-	header("Location: " . $_SERVER["HTTP_REFERER"]);
-
 }
 
 if(isset($_POST['add_user'])){

@@ -13,9 +13,9 @@ if(isset($_GET['doc_id'])){
 	
 	$row = mysqli_fetch_array($query);
 	
-	$title = $row['doc_title'];
-	$content = $row['doc_content'];
-	$category_id = $row['doc_category_id'];
+	$title = htmlentities($row['doc_title']);
+	$content = htmlentities($row['doc_content']);
+	$category_id = intval($row['doc_category_id']);
 
 ?>
 
@@ -51,8 +51,8 @@ if(isset($_GET['doc_id'])){
       $sql_select = mysqli_query($mysqli,"SELECT * FROM categories ORDER BY category_name ASC");
 
       while($row = mysqli_fetch_array($sql_select)){
-        $category_id_select = $row['category_id'];
-        $category_name_select = $row['category_name'];
+        $category_id_select = intval($row['category_id']);
+        $category_name_select = htmlentities($row['category_name']);
 	    
 	    ?>
 	    

@@ -29,8 +29,8 @@ include("nav.php");
       $sql = mysqli_query($mysqli,"SELECT * FROM categories ORDER BY category_name ASC");
 
       while($row = mysqli_fetch_array($sql)){
-        $category_id = $row['category_id'];
-        $category_name = $row['category_name'];
+        $category_id = intval($row['category_id']);
+        $category_name = htmlentities($row['category_name']);
 	    
 	    ?>
 	    

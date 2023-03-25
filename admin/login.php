@@ -10,7 +10,7 @@ include("header.php");
 <?php 
 
 	if(isset($_SESSION['response'])){
-		echo $_SESSION['response'];
+		echo htmlentities($_SESSION['response']);
 	}
 
 ?>
