@@ -172,7 +172,7 @@ if(isset($_GET['delete_category'])){
 
 	mysqli_query($mysqli,"DELETE FROM categories WHERE category_id = $category_id");
 
-	$_SESSION['response'] = "Category deleted."
+	$_SESSION['response'] = "Category deleted.";
 
 	header("Location: categories.php");
 
